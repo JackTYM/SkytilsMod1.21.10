@@ -37,26 +37,10 @@ import net.minecraft.client.render.entity.state.LivingEntityRenderState
  * [gg.skytils.event.mixins.render.MixinRendererLivingEntity.onRender]
  */
 class LivingEntityPreRenderEvent
-//#if MC<12000
-//$$     <T : LivingEntity>
-    //#else
-    //#if MC<12100
-    //$$ <T : LivingEntity, M: EntityModel<T>>
-    //#else
     <T : LivingEntity, S : LivingEntityRenderState, M : EntityModel<in S>>
-    //#endif
-    //#endif
     (
         val entity: T,
-        //#if MC<12000
-        //$$ val renderer: LivingEntityRenderer<T>,
-        //#else
-        //#if MC<12100
-        //$$ val renderer: LivingEntityRenderer<T, M>,
-        //#else
         val renderer: EntityRenderer<T, S>,
-        //#endif
-        //#endif
         val x: Double, val y: Double, val z: Double, val partialTicks: Float
     ) : CancellableEvent()
 
