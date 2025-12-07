@@ -70,9 +70,9 @@ public class MixinRendererLivingEntity
         if (!(entity instanceof LivingEntity)) return;
         Entity viewEntity = MinecraftClient.getInstance().getCameraEntity();
         if (viewEntity == null) return;
-        double renderX = entity.lastRenderX + (entity.getPos().x - entity.lastRenderX - viewEntity.getPos().x + viewEntity.lastRenderX) * tickProgress - viewEntity.lastRenderX;
-        double renderY = entity.lastRenderY + (entity.getPos().y - entity.lastRenderY - viewEntity.getPos().y + viewEntity.lastRenderY) * tickProgress - viewEntity.lastRenderY;
-        double renderZ = entity.lastRenderZ + (entity.getPos().z - entity.lastRenderZ - viewEntity.getPos().z + viewEntity.lastRenderZ) * tickProgress - viewEntity.lastRenderZ;
+        double renderX = entity.lastRenderX + (entity.getX() - entity.lastRenderX - viewEntity.getX() + viewEntity.lastRenderX) * tickProgress - viewEntity.lastRenderX;
+        double renderY = entity.lastRenderY + (entity.getY() - entity.lastRenderY - viewEntity.getY() + viewEntity.lastRenderY) * tickProgress - viewEntity.lastRenderY;
+        double renderZ = entity.lastRenderZ + (entity.getZ() - entity.lastRenderZ - viewEntity.getZ() + viewEntity.lastRenderZ) * tickProgress - viewEntity.lastRenderZ;
         @SuppressWarnings("unchecked")
         //#if MC<12000
         //$$ LivingEntityPreRenderEvent<T>
