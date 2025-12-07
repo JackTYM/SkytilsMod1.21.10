@@ -25,4 +25,8 @@ import kotlin.jvm.optionals.getOrNull
 val ItemStack.nbt
     get() =
         if (isEmpty) null
+        //#if MC>=12109
+        //$$ else components
+        //#else
         else MinecraftClient.getInstance().player?.registryManager?.let(::toNbt)?.asCompound()?.getOrNull()
+        //#endif
