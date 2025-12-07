@@ -53,8 +53,6 @@ project(":events").apply {
     buildFileName = "root.gradle.kts"
 }
 listOf(
-    "1.8.9-forge",
-    "1.8.9-fabric",
     "1.21.5-fabric"
 ).forEach { version ->
     include(":events:$version")
@@ -70,8 +68,6 @@ project(":mod").apply {
     buildFileName = "root.gradle.kts"
 }
 listOf(
-    "1.8.9-forge",
-    "1.8.9-fabric",
     "1.21.5-fabric"
 ).forEach { version ->
     include(":mod:$version")
