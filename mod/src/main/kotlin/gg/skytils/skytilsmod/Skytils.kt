@@ -500,7 +500,7 @@ object Skytils : CoroutineScope, EventSubscriber {
                     UDesktop.setClipboardString(
                         "Name: '${name}', Items: ${
                             chest.slots.filter { it.inventory == chest.inventory }
-                                .map { it.stack?.toNbt(UMinecraft.getMinecraft().player!!.registryManager) }
+                                .map { it.stack?.nbt }
                         }"
                     )
 
