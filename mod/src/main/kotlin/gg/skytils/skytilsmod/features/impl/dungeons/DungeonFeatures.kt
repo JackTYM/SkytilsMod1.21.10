@@ -481,7 +481,12 @@ object DungeonFeatures : EventSubscriber {
                     }
                 }
             }
-            if (!mc.entityRenderDispatcher.shouldRenderHitboxes()) {
+            //#if MC>=12110
+            //$$ val outline = event.state.hasOutline()
+            //#else
+            val outline = event.state.hasOutline
+            //#endif
+            if (!outline) {
                 if (!event.entity.isInvisible) {
                     if (event.entity is BatEntity && Skytils.config.showBatHitboxes && !hasBossSpawned &&
                         if (MayorInfo.currentMayor == "Derpy") equalsOneOf(
