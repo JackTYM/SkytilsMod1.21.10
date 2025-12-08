@@ -84,6 +84,7 @@ import net.minecraft.item.Items
 import net.minecraft.screen.GenericContainerScreenHandler
 import net.minecraft.nbt.NbtElement
 import net.minecraft.nbt.NbtCompound
+import net.minecraft.nbt.NbtOps
 import net.minecraft.nbt.NbtString
 import net.minecraft.network.packet.c2s.play.PlayerInteractBlockC2SPacket
 import net.minecraft.network.packet.s2c.play.EntityTrackerUpdateS2CPacket
@@ -470,7 +471,7 @@ object ItemFeatures : EventSubscriber {
         }
 
         if (DevTools.getToggle("nbt") && UKeyboard.isKeyDown(UKeyboard.KEY_C) && UKeyboard.isCtrlKeyDown() && !UKeyboard.isShiftKeyDown() && !UKeyboard.isAltKeyDown()) {
-            UDesktop.setClipboardString(event.stack.toNbt(mc.player!!.registryManager).toString())
+            UDesktop.setClipboardString(ItemStack.CODEC.encodeStart(mc.player!!.registryManager.getOps(NbtOps.INSTANCE), event.stack).toString())
         }
     }
 
