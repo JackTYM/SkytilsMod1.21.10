@@ -41,6 +41,7 @@ class LivingEntityPreRenderEvent
     (
         val entity: T,
         val renderer: EntityRenderer<T, S>,
+        val state: S,
         val x: Double, val y: Double, val z: Double, val partialTicks: Float
     ) : CancellableEvent()
 
