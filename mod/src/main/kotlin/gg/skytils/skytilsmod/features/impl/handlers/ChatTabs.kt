@@ -18,6 +18,7 @@
 
 package gg.skytils.skytilsmod.features.impl.handlers
 
+import com.mojang.serialization.JsonOps
 import gg.essential.elementa.ElementaVersion
 import gg.essential.elementa.components.UIContainer
 import gg.essential.elementa.components.Window
@@ -38,6 +39,7 @@ import gg.skytils.event.impl.screen.ScreenOpenEvent
 import gg.skytils.event.register
 import gg.skytils.skytilsmod.Skytils
 import gg.skytils.skytilsmod.Skytils.failPrefix
+import gg.skytils.skytilsmod.Skytils.json
 import gg.skytils.skytilsmod.Skytils.mc
 import gg.skytils.skytilsmod._event.PacketReceiveEvent
 import gg.skytils.skytilsmod.core.Notifications
@@ -47,12 +49,15 @@ import gg.skytils.skytilsmod.mixins.extensions.ExtensionChatStyle
 import gg.skytils.skytilsmod.mixins.transformers.accessors.AccessorGuiChat
 import gg.skytils.skytilsmod.mixins.transformers.accessors.AccessorGuiNewChat
 import gg.skytils.skytilsmod.utils.*
+import kotlinx.serialization.encodeToString
 import net.minecraft.client.gui.hud.ChatHudLine
 import net.minecraft.client.gui.screen.ChatScreen
 import net.minecraft.client.gui.hud.ChatHud
 import net.minecraft.network.packet.s2c.play.GameMessageS2CPacket
 import net.minecraft.text.Text
+import net.minecraft.text.TextCodecs
 import java.awt.Color
+import kotlin.jvm.optionals.getOrNull
 
 object ChatTabs : EventSubscriber {
     var selectedTab = ChatTab.ALL
@@ -144,10 +149,10 @@ object ChatTabs : EventSubscriber {
 
                 printDevMessage("Copied serialized message to clipboard!", "chat")
                 UDesktop.setClipboardString(
-                    Text.Serialization.toJsonString(
-                        component,
-                        UPlayer.getPlayer()?.registryManager
-                    )
+                    json.encodeToString(TextCodecs.CODEC.encodeStart(
+                        UPlayer.getPlayer()!!.registryManager.getOps(JsonOps.INSTANCE),
+                        component
+                    ).resultOrPartial().getOrNull())
                 )
             }
         } else if (Skytils.config.copyChat) {
