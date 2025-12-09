@@ -28,6 +28,7 @@ import gg.skytils.skytilsmod.mixins.transformers.accessors.AccessorPopupBackgrou
 import net.minecraft.client.font.TextRenderer
 import net.minecraft.client.gui.screen.PopupScreen
 import net.minecraft.client.render.OverlayTexture
+import net.minecraft.client.render.item.ItemRenderState
 import net.minecraft.client.texture.GlTexture
 import net.minecraft.item.ItemDisplayContext
 import net.minecraft.item.ItemStack
@@ -40,6 +41,7 @@ import java.awt.Color
 
 object DrawHelper {
     private val textureManager = mc.textureManager
+    private val itemRenderState = ItemRenderState()
 
     /**
      * Applies the camera offset to the given matrices.
@@ -281,7 +283,21 @@ object DrawHelper {
 
         matrices.scale(16.0f, -16.0f, 16.0f)
 
-        mc.itemRenderer.renderItem(if (dynamicDisplay) mc.player else null, stack, ItemDisplayContext.GUI, matrices.toMC(), mc.bufferBuilders.entityVertexConsumers, mc.world, 15728880, OverlayTexture.DEFAULT_UV, 0)
+        mc.itemModelManager.clearAndUpdate(
+            itemRenderState,
+            stack,
+            ItemDisplayContext.GUI,
+            mc.world,
+            if (dynamicDisplay) mc.player else null,
+            0
+        )
+
+        itemRenderState.render(
+            matrices.toMC(),
+            mc.bufferBuilders.entityVertexConsumers,
+            15728880,
+            OverlayTexture.DEFAULT_UV
+        )
 
         matrices.pop()
     }
