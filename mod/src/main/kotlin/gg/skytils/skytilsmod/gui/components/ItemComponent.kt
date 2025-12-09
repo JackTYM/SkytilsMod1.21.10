@@ -44,9 +44,7 @@ class ItemComponent(val state: State<ItemStack>) : UIComponent() {
         val vertexConsumer = UMinecraft.getMinecraft().bufferBuilders.entityVertexConsumers
         val item = state.getUntracked()
         RenderUtil.renderItem(item, 0, 0)
-        DiffuseLighting.disableGuiDepthLighting()
         vertexConsumer.draw()
-        DiffuseLighting.enableGuiDepthLighting()
         matrixStack.pop()
         UGraphics.disableLighting()
         super.draw(matrixStack)
