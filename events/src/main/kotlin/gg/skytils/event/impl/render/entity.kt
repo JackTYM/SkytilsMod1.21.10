@@ -43,7 +43,13 @@ class LivingEntityPreRenderEvent
         val renderer: EntityRenderer<T, S>,
         val state: S,
         val x: Double, val y: Double, val z: Double, val partialTicks: Float
-    ) : CancellableEvent()
+    ) : CancellableEvent() {
+    //#if MC>12105
+    //$$ val shouldRenderOutline = state.hasOutline()
+    //#else
+    val shouldRenderOutline = state.hasOutline
+    //#endif
+}
 
 /**
  * [gg.skytils.event.mixins.render.MixinRendererLivingEntity.onRenderPost]
