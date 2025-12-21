@@ -53,6 +53,7 @@ import kotlinx.serialization.encodeToString
 import net.minecraft.client.gui.hud.ChatHudLine
 import net.minecraft.client.gui.screen.ChatScreen
 import net.minecraft.client.gui.hud.ChatHud
+import net.minecraft.client.option.GameOptions
 import net.minecraft.network.packet.s2c.play.GameMessageS2CPacket
 import net.minecraft.text.Text
 import net.minecraft.text.TextCodecs
@@ -255,7 +256,16 @@ object ChatTabs : EventSubscriber {
             }
 
             private fun calculateChatHeight() =
+                //#if MC>=12111
+                //$$ UMinecraft.getChatGUI()?.let {
+                //$$     ChatHud.getHeight(
+                //$$       UMinecraft.getMinecraft().options
+                //$$             .let(if (it.isChatFocused) GameOptions::getChatHeightFocused
+                //$$            else GameOptions::getChatHeightUnfocused).value)
+                //$$ } ?: 0
+                //#else
                 UMinecraft.getChatGUI()?.height ?: 0
+                //#endif
         }
     }
 }
