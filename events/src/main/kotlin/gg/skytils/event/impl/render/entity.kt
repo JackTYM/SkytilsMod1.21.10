@@ -21,7 +21,6 @@ package gg.skytils.event.impl.render
 import gg.skytils.event.CancellableEvent
 import gg.skytils.event.Event
 import net.minecraft.client.render.entity.EntityRenderer
-import net.minecraft.client.render.entity.LivingEntityRenderer
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 
@@ -45,9 +44,9 @@ class LivingEntityPreRenderEvent
         val x: Double, val y: Double, val z: Double, val partialTicks: Float
     ) : CancellableEvent() {
     //#if MC>12105
-    //$$ val shouldRenderOutline = state.hasOutline()
+    //$$ val hitboxesEnabled = net.minecraft.client.MinecraftClient.getInstance().debugHudEntryList.isEntryVisible(net.minecraft.client.gui.hud.debug.DebugHudEntries.ENTITY_HITBOXES)
     //#else
-    val shouldRenderOutline = state.hasOutline
+    val hitboxesEnabled = state.hitbox != null
     //#endif
 }
 
