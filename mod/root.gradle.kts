@@ -24,7 +24,7 @@ version = "2.0.0-alpha.4"
 
 preprocess {
     val fabric12105 = createNode("1.21.5-fabric", 12105, "yarn")
-    val fabric12110 = createNode("1.21.10-fabric", 12110, "yarn")
+    val fabric12111 = createNode("1.21.11-fabric", 12111, "yarn")
 
-    fabric12110.link(fabric12105, file("versions/1.21.10-1.21.5.txt"))
+    fabric12111.link(fabric12105, file("versions/1.21.11-1.21.5.txt"))
 }

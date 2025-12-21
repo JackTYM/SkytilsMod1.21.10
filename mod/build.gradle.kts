@@ -143,7 +143,7 @@ dependencies {
     include(implementation("gg.essential:vigilance:312") {
         isTransitive = false
     })
-    modCompileOnly("gg.essential:universalcraft-${if (platform.mcVersion == 12110) "1.21.9-fabric" else platform.toString()}:444")
+    modCompileOnly("gg.essential:universalcraft-$platform:446")
     relocated(implementation("gg.essential:elementa-unstable-layoutdsl:710") {
         excludeKotlin()
         exclude(module = "fabric-loader")
