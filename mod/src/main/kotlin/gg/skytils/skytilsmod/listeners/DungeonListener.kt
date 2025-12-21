@@ -336,7 +336,13 @@ object DungeonListener : EventSubscriber {
                             DungeonClass.EMPTY,
                             0,
                             pos,
-                            old?.skinTextures?.texture ?: DefaultSkinHelper.getTexture()
+                            old?.run {
+                                //#if MC>=12111
+                                //$$ skinTextures.comp_1626().comp_3627()
+                                //#else
+                                skinTextures.texture
+                                //#endif
+                            } ?: DefaultSkinHelper.getTexture()
                         ).also {
                             if (old == null) {
                                 printDevMessage({ "could not get network player info for $name $action" }, "dungeonlistener")
