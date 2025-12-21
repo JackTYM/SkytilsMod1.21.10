@@ -191,7 +191,13 @@ object ItemUtil {
     }
 
     fun getSkullTexture(item: ItemStack?): String? =
-        item?.get(DataComponentTypes.PROFILE)?.properties?.get("textures")?.first()?.value
+        item?.get(DataComponentTypes.PROFILE)?.run {
+            //#if MC>=1211
+            //$$ gameProfile.properties
+            //#else
+            properties
+            //#endif
+        }?.get("textures")?.first()?.value
 
     // TODO: fix later
     fun ItemStack.setLore(lines: List<String>): ItemStack {
