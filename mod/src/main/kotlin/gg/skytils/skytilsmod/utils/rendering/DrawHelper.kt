@@ -217,9 +217,10 @@ object DrawHelper {
         color: Color = Color.WHITE
     ) {
         val buffer = UBufferBuilder.create(UGraphics.DrawMode.QUADS, UGraphics.CommonVertexFormats.POSITION_TEXTURE_COLOR)
-        UGraphics.bindTexture(0, sprite)
         val texture = textureManager.getTexture(sprite)
+        //#if MC<=12105
         texture.setFilter(false, false)
+        //#endif
         val glTexture = texture.glTexture as GlTexture
         val x2 = x + width
         val y2 = y + height
