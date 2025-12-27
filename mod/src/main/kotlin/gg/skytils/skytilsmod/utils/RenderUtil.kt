@@ -62,8 +62,21 @@ object RenderUtil {
     private val mutex = ReentrantLock()
 
     fun renderBeaconBeam(matrixStack: UMatrixStack, rgb: Int, partialTicks: Float) {
-        val height = 300
-        val bottomOffset = 0
+        //#if MC>=12111
+        //$$ val vertexConsumer = UMinecraft.getMinecraft().gameRenderer.entityRenderCommandQueue
+        //$$ BeaconBlockEntityRenderer.renderBeam(
+        //$$        matrixStack.toMC(),
+        //$$        vertexConsumer,
+        //$$        BeaconBlockEntityRenderer.BEAM_TEXTURE,
+        //$$        partialTicks,
+        //$$        1f,
+        //$$        mc.world!!.time.toInt(),
+        //$$        0,
+        //$$        rgb,
+        //$$        0.2f,
+        //$$        0.25f
+        //$$ )
+        //#else
         val vertexConsumer = UMinecraft.getMinecraft().bufferBuilders.entityVertexConsumers
         BeaconBlockEntityRenderer.renderBeam(
             matrixStack.toMC(),
@@ -72,13 +85,14 @@ object RenderUtil {
             partialTicks,
             1f,
             mc.world!!.time,
-            bottomOffset,
-            height,
+            0,
+            300,
             rgb,
             0.2f,
             0.25f
         )
         vertexConsumer.drawCurrentLayer()
+        //#endif
     }
 
     internal fun <T> Color.withParts(block: (Int, Int, Int, Int) -> T) =
