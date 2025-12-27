@@ -18,7 +18,6 @@
 package gg.skytils.skytilsmod.utils
 
 import com.mojang.blaze3d.systems.RenderSystem
-import com.mojang.blaze3d.textures.GpuTexture
 import gg.essential.elementa.utils.withAlpha
 import gg.essential.universal.ChatColor
 import gg.essential.universal.UGraphics
@@ -28,15 +27,10 @@ import gg.essential.universal.UResolution
 import gg.essential.universal.vertex.UBufferBuilder
 import gg.skytils.skytilsmod.Skytils
 import gg.skytils.skytilsmod.Skytils.mc
-import gg.skytils.skytilsmod.mixins.hooks.renderer.skipGlint
 import gg.skytils.skytilsmod.mixins.transformers.accessors.AccessorMinecraft
 import gg.skytils.skytilsmod.utils.rendering.DrawHelper
 import gg.skytils.skytilsmod.utils.rendering.DrawHelper.writeRectCoords
 import gg.skytils.skytilsmod.utils.rendering.SRenderPipelines
-import net.minecraft.block.Block
-import net.minecraft.client.gui.DrawContext
-import net.minecraft.client.render.Tessellator
-import net.minecraft.client.render.VertexFormats
 import net.minecraft.client.render.block.entity.BeaconBlockEntityRenderer
 import net.minecraft.client.texture.GlTexture
 import net.minecraft.entity.Entity
@@ -45,9 +39,7 @@ import net.minecraft.screen.slot.Slot
 import net.minecraft.util.*
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Box
-import net.minecraft.util.math.MathHelper
 import net.minecraft.util.math.Vec3d
-import org.lwjgl.opengl.GL11
 import java.awt.Color
 import java.util.concurrent.locks.ReentrantLock
 import kotlin.math.*
@@ -320,7 +312,6 @@ object RenderUtil {
         val color = rarity.color.withAlpha(alpha)
         val tex = (mc.textureManager.getTexture(texture).glTexture as GlTexture)
 
-        color.bindColor()
         val buffer = UBufferBuilder.create(UGraphics.DrawMode.QUADS, UGraphics.CommonVertexFormats.POSITION_TEXTURE_COLOR)
         buffer.pos(matrixStack, 0.0, 0.0, 0.0).tex(0.0, 0.0).color(color).endVertex()
         buffer.pos(matrixStack, 16.0, 0.0, 0.0).tex(1.0, 0.0).color(color).endVertex()
@@ -616,7 +607,6 @@ object RenderUtil {
     }
 }
 
-fun Color.bindColor() = RenderSystem.setShaderColor(this.red / 255f, this.green / 255f, this.blue / 255f, this.alpha / 255f)
 fun Color.withAlpha(alpha: Int): Int = (alpha.coerceIn(0, 255) shl 24) or (this.rgb and 0x00ffffff)
 
 fun Color.multAlpha(mult: Float) = Color(
