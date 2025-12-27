@@ -114,8 +114,10 @@ object RenderUtil {
         val matrices = UMatrixStack.Compat.get()
         matrices.push()
         DrawHelper.setupCameraTransformations(matrices)
+        //#if MC<=12105
         RenderSystem.lineWidth(width)
-        DrawHelper.writeOutlineCube(buffer, matrices, aabb, color.multAlpha(1f))
+        //#endif
+        DrawHelper.writeOutlineCube(buffer, matrices, aabb, color.multAlpha(1f), width)
         buffer.build()?.drawAndClose(if (throughWalls) SRenderPipelines.noDepthBoxPipeline else SRenderPipelines.boxPipeline)
         matrices.pop()
     }
@@ -156,11 +158,21 @@ object RenderUtil {
     ) {
         matrixStack.push()
         DrawHelper.setupCameraTransformations(matrixStack)
+        //#if MC<=12105
         RenderSystem.lineWidth(width.toFloat())
+        //#endif
         val fixedColor = color.multAlpha(alphaMultiplier)
         val buffer = UBufferBuilder.create(UGraphics.DrawMode.LINE_STRIP, UGraphics.CommonVertexFormats.POSITION_COLOR)
-        buffer.pos(matrixStack, pos1.x, pos1.y, pos1.z).color(fixedColor).endVertex()
-        buffer.pos(matrixStack, pos2.x, pos2.y, pos2.z).color(fixedColor).endVertex()
+        buffer.pos(matrixStack, pos1.x, pos1.y, pos1.z).color(fixedColor)
+            //#if MC>=12111
+            //$$ .lineWidth(width)
+            //#endif
+            .endVertex()
+        buffer.pos(matrixStack, pos2.x, pos2.y, pos2.z).color(fixedColor)
+            //#if MC>=12111
+            //$$ .lineWidth(width)
+            //#endif
+            .endVertex()
         buffer.build()?.drawAndClose(SRenderPipelines.linesPipeline)
         matrixStack.pop()
     }
@@ -175,11 +187,17 @@ object RenderUtil {
     ) {
         matrixStack.push()
         DrawHelper.setupCameraTransformations(matrixStack)
+        //#if MC<=12105
         RenderSystem.lineWidth(width.toFloat())
+        //#endif
         val fixedColor = color.multAlpha(alphaMultiplier)
         val buffer = UBufferBuilder.create(UGraphics.DrawMode.LINE_STRIP, UGraphics.CommonVertexFormats.POSITION_COLOR)
         for (pos in points) {
-            buffer.pos(matrixStack, pos.x, pos.y, pos.z).color(fixedColor).endVertex()
+            buffer.pos(matrixStack, pos.x, pos.y, pos.z).color(fixedColor)
+                //#if MC>=12111
+                //$$ .lineWidth(width)
+                //#endif
+                .endVertex()
         }
         buffer.build()?.drawAndClose(SRenderPipelines.linesPipeline)
         matrixStack.pop()
@@ -436,11 +454,17 @@ object RenderUtil {
 
     fun drawCircle(matrixStack: UMatrixStack, x: Double, y: Double, z: Double, partialTicks: Float, radius: Double, edges: Int, r: Int, g: Int, b: Int, a: Int = 255) {
         val angleDelta = Math.PI * 2 / edges
+        //#if MC<=12105
         RenderSystem.lineWidth(5f)
+        //#endif
         val buffer = UBufferBuilder.create(UGraphics.DrawMode.LINE_STRIP, UGraphics.CommonVertexFormats.POSITION_COLOR)
         val (dx, dy, dz) = getViewerPos(partialTicks)
         repeat(edges) { idx ->
-            buffer.pos(matrixStack, x - dx + radius * cos(idx * angleDelta), y - dy, z - dz + radius * sin(idx * angleDelta)).color(r, g, b, a).endVertex()
+            buffer.pos(matrixStack, x - dx + radius * cos(idx * angleDelta), y - dy, z - dz + radius * sin(idx * angleDelta)).color(r, g, b, a)
+                //#if MC>=12111
+                //$$ .lineWidth(5f)
+                //#endif
+                .endVertex()
         }
         buffer.pos(matrixStack, x + radius - dx, y - dy, z - dz).color(r, g, b, a).endVertex()
         buffer.build()?.drawAndClose(SRenderPipelines.linesPipeline)

@@ -22,6 +22,7 @@ import gg.essential.universal.UGraphics
 import gg.essential.universal.UMatrixStack
 import gg.essential.universal.render.URenderPipeline
 import gg.essential.universal.vertex.UBufferBuilder
+import gg.essential.universal.vertex.UVertexConsumer
 import gg.skytils.skytilsmod.Skytils.mc
 import gg.skytils.skytilsmod.mixins.transformers.accessors.AccessorGuiContainer
 import gg.skytils.skytilsmod.mixins.transformers.accessors.AccessorPopupBackground
@@ -38,6 +39,10 @@ import net.minecraft.util.math.Box
 import net.minecraft.util.math.MathHelper
 import org.joml.Quaternionf
 import java.awt.Color
+
+//#if MC>=12111
+//$$ import gg.skytils.skytilsmod.utils.lineWidth
+//#endif
 
 object DrawHelper {
     private val textureManager = mc.textureManager
@@ -95,44 +100,50 @@ object DrawHelper {
         buffer: UBufferBuilder,
         matrices: UMatrixStack,
         box: Box,
-        color: Color
+        color: Color,
+        lineWidth: Float = 1f
     ) {
+        //#if MC<=12105
+        fun UVertexConsumer.lineWidth(width: Float) = apply {
+            // no-op on 1.21.5
+        }
+        //#endif
         box.apply {
-            buffer.pos(matrices, minX, minY, minZ).color(color).endVertex()
-            buffer.pos(matrices, maxX, minY, minZ).color(color).endVertex()
+            buffer.pos(matrices, minX, minY, minZ).color(color).lineWidth(lineWidth).endVertex()
+            buffer.pos(matrices, maxX, minY, minZ).color(color).lineWidth(lineWidth).endVertex()
 
-            buffer.pos(matrices, maxX, minY, minZ).color(color).endVertex()
-            buffer.pos(matrices, maxX, minY, maxZ).color(color).endVertex()
+            buffer.pos(matrices, maxX, minY, minZ).color(color).lineWidth(lineWidth).endVertex()
+            buffer.pos(matrices, maxX, minY, maxZ).color(color).lineWidth(lineWidth).endVertex()
 
-            buffer.pos(matrices, maxX, minY, maxZ).color(color).endVertex()
-            buffer.pos(matrices, minX, minY, maxZ).color(color).endVertex()
+            buffer.pos(matrices, maxX, minY, maxZ).color(color).lineWidth(lineWidth).endVertex()
+            buffer.pos(matrices, minX, minY, maxZ).color(color).lineWidth(lineWidth).endVertex()
 
-            buffer.pos(matrices, minX, minY, maxZ).color(color).endVertex()
-            buffer.pos(matrices, minX, minY, minZ).color(color).endVertex()
+            buffer.pos(matrices, minX, minY, maxZ).color(color).lineWidth(lineWidth).endVertex()
+            buffer.pos(matrices, minX, minY, minZ).color(color).lineWidth(lineWidth).endVertex()
 
-            buffer.pos(matrices, minX, maxY, minZ).color(color).endVertex()
-            buffer.pos(matrices, maxX, maxY, minZ).color(color).endVertex()
+            buffer.pos(matrices, minX, maxY, minZ).color(color).lineWidth(lineWidth).endVertex()
+            buffer.pos(matrices, maxX, maxY, minZ).color(color).lineWidth(lineWidth).endVertex()
 
-            buffer.pos(matrices, maxX, maxY, minZ).color(color).endVertex()
-            buffer.pos(matrices, maxX, maxY, maxZ).color(color).endVertex()
+            buffer.pos(matrices, maxX, maxY, minZ).color(color).lineWidth(lineWidth).endVertex()
+            buffer.pos(matrices, maxX, maxY, maxZ).color(color).lineWidth(lineWidth).endVertex()
 
-            buffer.pos(matrices, maxX, maxY, maxZ).color(color).endVertex()
-            buffer.pos(matrices, minX, maxY, maxZ).color(color).endVertex()
+            buffer.pos(matrices, maxX, maxY, maxZ).color(color).lineWidth(lineWidth).endVertex()
+            buffer.pos(matrices, minX, maxY, maxZ).color(color).lineWidth(lineWidth).endVertex()
 
-            buffer.pos(matrices, minX, maxY, maxZ).color(color).endVertex()
-            buffer.pos(matrices, minX, maxY, minZ).color(color).endVertex()
+            buffer.pos(matrices, minX, maxY, maxZ).color(color).lineWidth(lineWidth).endVertex()
+            buffer.pos(matrices, minX, maxY, minZ).color(color).lineWidth(lineWidth).endVertex()
 
-            buffer.pos(matrices, minX, minY, minZ).color(color).endVertex()
-            buffer.pos(matrices, minX, maxY, minZ).color(color).endVertex()
+            buffer.pos(matrices, minX, minY, minZ).color(color).lineWidth(lineWidth).endVertex()
+            buffer.pos(matrices, minX, maxY, minZ).color(color).lineWidth(lineWidth).endVertex()
 
-            buffer.pos(matrices, maxX, minY, minZ).color(color).endVertex()
-            buffer.pos(matrices, maxX, maxY, minZ).color(color).endVertex()
+            buffer.pos(matrices, maxX, minY, minZ).color(color).lineWidth(lineWidth).endVertex()
+            buffer.pos(matrices, maxX, maxY, minZ).color(color).lineWidth(lineWidth).endVertex()
 
-            buffer.pos(matrices, maxX, minY, maxZ).color(color).endVertex()
-            buffer.pos(matrices, maxX, maxY, maxZ).color(color).endVertex()
+            buffer.pos(matrices, maxX, minY, maxZ).color(color).lineWidth(lineWidth).endVertex()
+            buffer.pos(matrices, maxX, maxY, maxZ).color(color).lineWidth(lineWidth).endVertex()
 
-            buffer.pos(matrices, minX, minY, maxZ).color(color).endVertex()
-            buffer.pos(matrices, minX, maxY, maxZ).color(color).endVertex()   
+            buffer.pos(matrices, minX, minY, maxZ).color(color).lineWidth(lineWidth).endVertex()
+            buffer.pos(matrices, minX, maxY, maxZ).color(color).lineWidth(lineWidth).endVertex()
         }
     }
 
