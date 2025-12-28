@@ -30,6 +30,7 @@ import net.minecraft.client.font.TextRenderer
 import net.minecraft.client.gui.screen.PopupScreen
 import net.minecraft.client.render.OverlayTexture
 import net.minecraft.client.render.item.ItemRenderState
+import net.minecraft.client.render.item.ItemRenderer
 import net.minecraft.client.texture.GlTexture
 import net.minecraft.item.ItemDisplayContext
 import net.minecraft.item.ItemStack
@@ -42,6 +43,7 @@ import java.awt.Color
 
 //#if MC>=12111
 //$$ import gg.skytils.skytilsmod.utils.lineWidth
+//$$ import net.minecraft.client.render.command.OrderedRenderCommandQueueImpl
 //#endif
 
 object DrawHelper {
@@ -304,12 +306,43 @@ object DrawHelper {
             0
         )
 
+        //#if MC>=12111
+        //$$ val commandQueue = OrderedRenderCommandQueueImpl()
+        //$$ itemRenderState.render(
+        //$$     matrices.toMC(),
+        //$$     commandQueue,
+        //$$     15728880,
+        //$$     OverlayTexture.DEFAULT_UV,
+        //$$     0
+        //$$ )
+        //$$ commandQueue.batchingQueues.forEach { it.value.itemCommands.forEach { command ->
+        //$$     matrices.push()
+        //$$     matrices.peek().copy(
+        //$$         model = command.positionMatrix.positionMatrix,
+        //$$         normal = command.positionMatrix.normalMatrix
+        //$$     )
+        //$$     ItemRenderer.renderItem(
+        //$$         command.comp_4638,
+        //$$         matrices.toMC(),
+        //$$         mc.bufferBuilders.entityVertexConsumers,
+        //$$         command.comp_4500,
+        //$$         command.comp_4501,
+        //$$         command.comp_4639,
+        //$$         command.comp_4640,
+        //$$         command.renderLayer,
+        //$$         command.glintType
+        //$$     )
+        //$$
+        //$$     matrices.pop()
+        //$$ } }
+        //#else
         itemRenderState.render(
             matrices.toMC(),
             mc.bufferBuilders.entityVertexConsumers,
             15728880,
             OverlayTexture.DEFAULT_UV
         )
+        //#endif
 
         matrices.pop()
     }
