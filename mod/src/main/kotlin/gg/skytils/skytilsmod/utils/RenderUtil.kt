@@ -54,7 +54,7 @@ object RenderUtil {
     private val mutex = ReentrantLock()
 
     fun renderBeaconBeam(matrixStack: UMatrixStack, rgb: Int, partialTicks: Float) {
-        //#if MC>=12111
+        //#if MC>=12110
         //$$ val vertexConsumer = UMinecraft.getMinecraft().gameRenderer.entityRenderCommandQueue
         //$$ BeaconBlockEntityRenderer.renderBeam(
         //$$        matrixStack.toMC(),
@@ -106,7 +106,7 @@ object RenderUtil {
         val matrices = UMatrixStack.Compat.get()
         matrices.push()
         DrawHelper.setupCameraTransformations(matrices)
-        //#if MC<=12105
+        //#if MC<=12110
         RenderSystem.lineWidth(width)
         //#endif
         DrawHelper.writeOutlineCube(buffer, matrices, aabb, color.multAlpha(1f), width)
@@ -150,7 +150,7 @@ object RenderUtil {
     ) {
         matrixStack.push()
         DrawHelper.setupCameraTransformations(matrixStack)
-        //#if MC<=12105
+        //#if MC<=12110
         RenderSystem.lineWidth(width.toFloat())
         //#endif
         val fixedColor = color.multAlpha(alphaMultiplier)
@@ -179,7 +179,7 @@ object RenderUtil {
     ) {
         matrixStack.push()
         DrawHelper.setupCameraTransformations(matrixStack)
-        //#if MC<=12105
+        //#if MC<=12110
         RenderSystem.lineWidth(width.toFloat())
         //#endif
         val fixedColor = color.multAlpha(alphaMultiplier)

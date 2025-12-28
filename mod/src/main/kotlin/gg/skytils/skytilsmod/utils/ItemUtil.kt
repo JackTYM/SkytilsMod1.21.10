@@ -155,7 +155,7 @@ object ItemUtil {
             ?.run(PET_PATTERN::matches) ?: false
 
     private fun profileComponent(uuid: UUID, propertyMap: PropertyMap): ProfileComponent =
-        //#if MC>=12111
+        //#if MC>=12110
         //$$ ProfileComponent.ofStatic(GameProfile(uuid, "", propertyMap))
         //#else
         ProfileComponent(Optional.empty(), Optional.of(uuid), propertyMap)
@@ -164,7 +164,7 @@ object ItemUtil {
     fun setSkullTexture(item: ItemStack, texture: String, SkullOwner: String): ItemStack {
         item.set(DataComponentTypes.PROFILE, profileComponent(UUID.fromString(SkullOwner),
             PropertyMap(
-                //#if MC>=12111
+                //#if MC>=12110
                 //$$ com.google.common.collect.LinkedHashMultimap.create()
                 //#endif
             ).apply {

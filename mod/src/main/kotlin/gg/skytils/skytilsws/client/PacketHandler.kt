@@ -45,7 +45,7 @@ import java.util.*
 object PacketHandler : IPacketHandler {
     suspend fun handleLogin(session: WebSocketSession, packet: S2CPacketAcknowledge) {
         val serverId = UUID.randomUUID().toString().replace("-".toRegex(), "")
-        //#if MC>=12111
+        //#if MC>=12110
         //$$ mc.apiServices.comp_837()
         //#else
         mc.sessionService

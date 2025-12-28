@@ -43,6 +43,9 @@ import java.awt.Color
 
 //#if MC>=12111
 //$$ import gg.skytils.skytilsmod.utils.lineWidth
+//#endif
+
+//#if MC>=12110
 //$$ import net.minecraft.client.render.command.OrderedRenderCommandQueueImpl
 //#endif
 
@@ -105,9 +108,9 @@ object DrawHelper {
         color: Color,
         lineWidth: Float = 1f
     ) {
-        //#if MC<=12105
+        //#if MC<=12110
         fun UVertexConsumer.lineWidth(width: Float) = apply {
-            // no-op on 1.21.5
+            // no-op below 1.21.11 as it doesn't exist
         }
         //#endif
         box.apply {
@@ -306,7 +309,7 @@ object DrawHelper {
             0
         )
 
-        //#if MC>=12111
+        //#if MC>=12110
         //$$ val commandQueue = OrderedRenderCommandQueueImpl()
         //$$ itemRenderState.render(
         //$$     matrices.toMC(),
