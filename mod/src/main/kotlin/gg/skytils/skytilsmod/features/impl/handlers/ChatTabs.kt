@@ -54,11 +54,14 @@ import net.minecraft.client.gui.hud.ChatHudLine
 import net.minecraft.client.gui.screen.ChatScreen
 import net.minecraft.client.gui.hud.ChatHud
 import net.minecraft.client.option.GameOptions
+import net.minecraft.network.message.ChatVisibility
 import net.minecraft.network.packet.s2c.play.GameMessageS2CPacket
 import net.minecraft.text.Text
 import net.minecraft.text.TextCodecs
 import java.awt.Color
 import kotlin.jvm.optionals.getOrNull
+import kotlin.math.floor
+import kotlin.math.min
 
 object ChatTabs : EventSubscriber {
     var selectedTab = ChatTab.ALL
@@ -270,6 +273,36 @@ object ChatTabs : EventSubscriber {
     }
 }
 
+val chatScale: Double
+    get() = mc.options.chatScale.value
+
+fun ChatHud.toChatLineX(x: Double) =
+    x / chatScale - 4.0
+
+fun ChatHud.toChatLineY(y: Double) =
+    (mc.window.scaledHeight - y - 40) / (chatScale * 9.0 * (mc.options.chatLineSpacing.value + 1.0))
+
+fun ChatHud.getMessageLineIndex(x: Double, y: Double): Int {
+    if (isChatFocused && mc.options.chatVisibility.value != ChatVisibility.HIDDEN) {
+        //#if MC>=12111
+        //$$ val width = ChatHud.getWidth(chatScale)
+        //#else
+        val width = width
+        //#endif
+        if (x !in -4.0..(width / chatScale)) return -1
+        val totalLines = min(visibleLineCount, (this as AccessorGuiNewChat).drawnChatLines.size)
+        if (y.toInt() !in 1..totalLines) {
+            val withScrollOffset = floor(y + this.scrollPos).toInt()
+            if (withScrollOffset in 0 until this.drawnChatLines.size) {
+                return withScrollOffset
+            }
+        }
+        return -1
+    } else {
+        return -1
+    }
+}
+
 fun ChatHud.getChatLine(mouseX: Double, mouseY: Double): ChatHudLine.Visible? {
     if (isChatFocused && this is AccessorGuiNewChat) {
         //#if MC==10809
@@ -289,9 +322,9 @@ fun ChatHud.getChatLine(mouseX: Double, mouseY: Double): ChatHudLine.Visible? {
         //$$     }
         //$$ }
         //#else
-        val chatX = this.invokeToChatLineX(mouseX)
-        val chatY = this.invokeToChatLineY(mouseY)
-        val chatIndex = this.invokeGetMessageLineIndex(chatX, chatY)
+        val chatX = this.toChatLineX(mouseX)
+        val chatY = this.toChatLineY(mouseY)
+        val chatIndex = this.getMessageLineIndex(chatX, chatY)
         return this.drawnChatLines.getOrNull(chatIndex)
         //#endif
     }
