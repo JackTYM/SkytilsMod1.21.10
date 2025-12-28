@@ -123,13 +123,13 @@ dependencies {
         include("gg.essential:loader-launchwrapper:1.2.3")
     } else {
         include(modRuntimeOnly("gg.essential:loader-fabric:1.2.3")!!)
-        modImplementation("net.fabricmc.fabric-api:fabric-api") {
-            version {
-                require(when {
-                    platform.mcVersion == 12105 -> "0.128.0+1.21.5"
-                    else -> "0.119.2+1.21.4"
-                })
-            }
+        val fapiVersion = when (platform.mcVersion) {
+            12105 -> "0.128.0+1.21.5"
+            12111 -> "0.140.2+1.21.11"
+            else -> error("No fabric api version configured")
+        }
+        modImplementation("net.fabricmc.fabric-api:fabric-api:$fapiVersion") {
+            exclude(module = "fabric-content-registries-v0")
         }
     }
     modCompileOnly("gg.essential:essential-${if (platform.mcVersion >= 12006) "1.20.6-fabric" else if (!isLegacyFabric) platform.toString() else "${platform.mcVersionStr}-forge"}:17141+gd6f4cfd3a8") {
