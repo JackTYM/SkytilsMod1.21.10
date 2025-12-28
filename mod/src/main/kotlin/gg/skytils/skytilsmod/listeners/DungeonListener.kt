@@ -138,7 +138,7 @@ object DungeonListener : EventSubscriber {
     }
 
     private fun PlayerListEntry?.skinTextureIdentifier() = this?.run {
-        //#if MC>=12111
+        //#if MC>=12110
         //$$ skinTextures.comp_1626().comp_3627()
         //#else
         skinTextures.texture
