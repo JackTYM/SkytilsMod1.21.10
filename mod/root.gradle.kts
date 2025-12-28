@@ -27,6 +27,6 @@ preprocess {
     val fabric12110 = createNode("1.21.10-fabric", 12110, "yarn")
     val fabric12111 = createNode("1.21.11-fabric", 12111, "yarn")
 
-    fabric12110.link(fabric12111)
-    fabric12111.link(fabric12105, file("versions/1.21.11-1.21.5.txt"))
+    fabric12111.link(fabric12110)
+    fabric12110.link(fabric12105, file("versions/1.21.11-1.21.5.txt"))
 }
