@@ -125,6 +125,7 @@ dependencies {
         include(modRuntimeOnly("gg.essential:loader-fabric:1.2.3")!!)
         val fapiVersion = when (platform.mcVersion) {
             12105 -> "0.128.0+1.21.5"
+            12110 -> "0.138.4+1.21.10"
             12111 -> "0.140.2+1.21.11"
             else -> error("No fabric api version configured")
         }
@@ -143,7 +144,7 @@ dependencies {
     include(implementation("gg.essential:vigilance:312") {
         isTransitive = false
     })
-    modCompileOnly("gg.essential:universalcraft-$platform:446")
+    modCompileOnly("gg.essential:universalcraft-${if (platform.mcVersion == 12110) "1.21.9-fabric" else platform}:446")
     relocated(implementation("gg.essential:elementa-unstable-layoutdsl:710") {
         excludeKotlin()
         exclude(module = "fabric-loader")
