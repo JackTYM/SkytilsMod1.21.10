@@ -16,6 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+import gg.essential.gradle.util.noServerRunConfigs
 import net.fabricmc.loom.task.RemapJarTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import java.security.MessageDigest
@@ -68,6 +69,7 @@ loom {
     if (isLegacyFabric) {
         intermediaryUrl.set("https://repo.legacyfabric.net/repository/legacyfabric/net/legacyfabric/v2/intermediary/%1\$s/intermediary-%1\$s-v2.jar")
     }
+    noServerRunConfigs()
     silentMojangMappingsLicense()
     runConfigs {
         getByName("client") {
