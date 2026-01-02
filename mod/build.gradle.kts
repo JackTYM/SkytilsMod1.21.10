@@ -122,7 +122,7 @@ dependencies {
     if (platform.isForge) {
         include("gg.essential:loader-launchwrapper:1.2.3")
     } else {
-        include(modRuntimeOnly("gg.essential:loader-fabric:1.2.3")!!)
+        include(modRuntimeOnly("gg.essential:loader-fabric:1.2.5")!!)
         val fapiVersion = when (platform.mcVersion) {
             12105 -> "0.128.0+1.21.5"
             12110 -> "0.138.4+1.21.10"
