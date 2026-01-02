@@ -230,7 +230,7 @@ dependencies {
         }
         relocated(include(implementation("net.hypixel:mod-api-forge-tweaker:1.0.1.2")!!)!!)
     } else {
-        compileOnly("net.hypixel:mod-api:1.0.1")
+        modImplementation("net.hypixel:mod-api:1.0.1")
         include(modImplementation("maven.modrinth:hypixel-mod-api:1.0.1+build.1+mc1.21")!!)
     }
 
