@@ -66,18 +66,19 @@ public abstract class MixinNetHandlerPlayClient implements ClientPlayPacketListe
     }
 
     //# if MC>12000
-    private static final MinecraftClient client = MinecraftClient.getInstance();
+    @Unique
+    private static final MinecraftClient skytils$client = MinecraftClient.getInstance();
 
     @Inject(method = "onBlockUpdate", at = @At("TAIL"))
     private void onBlockUpdate(BlockUpdateS2CPacket packet, CallbackInfo ci) {
-        if (client.world == null) return;
+        if (skytils$client.world == null) return;
         if (!Skytils.getConfig().getGlassPaneDesync()) return;
 
         for (Direction dir : Direction.Type.HORIZONTAL) {
             BlockPos neighborPos = packet.getPos().offset(dir);
-            BlockState neighborState = client.world.getBlockState(neighborPos);
+            BlockState neighborState = skytils$client.world.getBlockState(neighborPos);
             if (neighborState.getBlock() instanceof PaneBlock) {
-                client.world.setBlockState(neighborPos, updateState(neighborPos, neighborState));
+                skytils$client.world.setBlockState(neighborPos, updateState(neighborPos, neighborState));
             }
         }
     }
@@ -88,7 +89,7 @@ public abstract class MixinNetHandlerPlayClient implements ClientPlayPacketListe
         for (Direction dir : PaneBlock.FACING_PROPERTIES.keySet()){
             BooleanProperty property = PaneBlock.FACING_PROPERTIES.get(dir);
             if (state.get(property)){
-                if (client.world.getBlockState(pos.offset(dir)).isAir()){
+                if (skytils$client.world.getBlockState(pos.offset(dir)).isAir()){
                     state = state.with(property, false);
                 }
                 else validConnect++;
