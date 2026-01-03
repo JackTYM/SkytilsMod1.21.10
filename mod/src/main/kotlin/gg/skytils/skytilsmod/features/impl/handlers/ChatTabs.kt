@@ -122,8 +122,10 @@ object ChatTabs : EventSubscriber {
     }
 
     fun drawScreen(event: ScreenDrawEvent) {
-        if (!Skytils.config.chatTabs || !Utils.isOnHypixel || event.screen !is ChatScreen) return
-        ChatTab.screen.draw(UMatrixStack())
+        if (!Utils.isOnHypixel || event.screen !is ChatScreen) return
+        if (Skytils.config.chatTabs) {
+            ChatTab.screen.draw(UMatrixStack())
+        }
         UMinecraft.getChatGUI()?.let { chat ->
             hoveredChatLine =
                 if (Skytils.config.copyChat && chat.isChatFocused) chat.getChatLine(event.mouseX, event.mouseY) else null
