@@ -291,7 +291,7 @@ fun ChatHud.getMessageLineIndex(x: Double, y: Double): Int {
         //#endif
         if (x !in -4.0..(width / chatScale)) return -1
         val totalLines = min(visibleLineCount, (this as AccessorGuiNewChat).drawnChatLines.size)
-        if (y.toInt() !in 1..totalLines) {
+        if (y.toInt() in 1..totalLines) {
             val withScrollOffset = floor(y + this.scrollPos).toInt()
             if (withScrollOffset in 0 until this.drawnChatLines.size) {
                 return withScrollOffset
