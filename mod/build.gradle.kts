@@ -133,6 +133,8 @@ dependencies {
         }
         modImplementation("net.fabricmc.fabric-api:fabric-api:$fapiVersion") {
             exclude(module = "fabric-content-registries-v0")
+            exclude(module = "fabric-rendering-fluids-v1")
+            exclude(module = "fabric-transfer-api-v1")
         }
     }
     modCompileOnly("gg.essential:essential-${if (platform.mcVersion >= 12006) "1.20.6-fabric" else if (!isLegacyFabric) platform.toString() else "${platform.mcVersionStr}-forge"}:17141+gd6f4cfd3a8") {
