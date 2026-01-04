@@ -45,7 +45,7 @@ object EnchantNames : EventSubscriber, PersistentSave(File(Skytils.modDir, "ench
     fun onTooltip(event: ItemTooltipEvent) {
         if (replacements.isEmpty()) return
         event.tooltip.replaceAll { line ->
-            (handleText(line.string, line.style) ?: line).also {
+            (handleText(line.string, line.style) ?: line.copy()).also {
                 it.siblings.replaceAll { sibling ->
                     handleText(sibling.string, sibling.style) ?: sibling
                 }
