@@ -30,6 +30,9 @@
     "mixins.skytils.json",
     "mixins.skytils-events.json"
   ],
+  "mixinextras": {
+    "minVersion": "0.5.2"
+  },
   "depends": {
     "cloud": "*",
     "essential-loader": ">=1.2.3",
