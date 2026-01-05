@@ -21,7 +21,8 @@ package gg.skytils.skytilsmod.mixins.transformers.crash;
 import com.llamalad7.mixinextras.expression.Definition;
 import com.llamalad7.mixinextras.expression.Expression;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
-import com.llamalad7.mixinextras.sugar.Local;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import gg.skytils.skytilsmod.mixins.hooks.crash.CrashReportHook;
 import net.minecraft.util.SystemDetails;
 import net.minecraft.util.crash.CrashReport;
@@ -32,7 +33,6 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(value = CrashReport.class, priority = 988)
 public abstract class MixinCrashReport {
@@ -44,12 +44,12 @@ public abstract class MixinCrashReport {
     @Unique
     private final CrashReportHook hook = new CrashReportHook((CrashReport) (Object) this);
 
-    @Definition(id = "stringBuilder", local = @Local(ordinal = 0), type = StringBuilder.class)
     @Definition(id = "append", method = "Ljava/lang/StringBuilder;append(Ljava/lang/String;)Ljava/lang/StringBuilder;")
-    @Expression("stringBuilder.append('Time: ')")
-    @Inject(method = "asString(Lnet/minecraft/util/crash/ReportType;Ljava/util/List;)Ljava/lang/String;", at = @At("MIXINEXTRAS:EXPRESSION"))
-    private void injectInfoIntoReport(CallbackInfoReturnable<String> cir, @Local(ordinal = 0) StringBuilder stringbuilder) {
-        hook.checkSkytilsCrash(cir, stringbuilder);
+    @Expression("?.append('Time: ')")
+    @WrapOperation(method = "asString(Lnet/minecraft/util/crash/ReportType;Ljava/util/List;)Ljava/lang/String;", at = @At("MIXINEXTRAS:EXPRESSION"))
+    private StringBuilder injectInfoIntoReport(StringBuilder instance, String str, Operation<StringBuilder> original) {
+        hook.checkSkytilsCrash(instance);
+        return original.call(instance, str);
     }
 
     @ModifyExpressionValue(method = "asString(Lnet/minecraft/util/crash/ReportType;Ljava/util/List;)Ljava/lang/String;", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/crash/CrashReport;getCauseAsString()Ljava/lang/String;"))

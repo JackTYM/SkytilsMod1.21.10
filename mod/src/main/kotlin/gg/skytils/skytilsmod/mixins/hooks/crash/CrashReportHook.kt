@@ -33,7 +33,7 @@ class CrashReportHook(private val crash: CrashReport) {
 
     private var isSkytilsCrash = false
 
-    fun checkSkytilsCrash(cir: CallbackInfoReturnable<String>, stringbuilder: StringBuilder) {
+    fun checkSkytilsCrash(stringbuilder: StringBuilder) {
         runCatching {
             if (!isSkytilsCrash && crash.causeAsString.split("\n").any { line ->
                     (line.contains("gg.skytils.skytilsmod") || line.contains("gg/skytils/skytilsmod")) && !line.contains(
