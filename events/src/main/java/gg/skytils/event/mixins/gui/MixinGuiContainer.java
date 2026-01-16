@@ -65,10 +65,10 @@ public abstract class MixinGuiContainer extends Screen {
                         //#endif
                     shift = At.Shift.BEFORE
             ), cancellable = true)
-    //#if MC>=12000
-    private void closeWindowPressed(int keyCode, int scanCode, int modifiers, CallbackInfoReturnable<Boolean> cir) {
+    //#if MC>=12110
+    //$$ private void closeWindowPressed(net.minecraft.client.input.KeyInput keyInput, CallbackInfoReturnable<Boolean> cir) {
     //#else
-    //$$ private void closeWindowPressed(CallbackInfo ci) {
+    private void closeWindowPressed(int keyCode, int scanCode, int modifiers, CallbackInfoReturnable<Boolean> cir) {
     //#endif
         if (EventsKt.postCancellableSync(new GuiContainerCloseWindowEvent((HandledScreen) (Object) this, this.handler))) {
             //#if MC>=12000
