@@ -20,6 +20,7 @@ package gg.skytils.skytilsmod.mixins.hooks.audio
 import gg.skytils.skytilsmod.Skytils
 import gg.skytils.skytilsmod.utils.Utils
 import net.minecraft.client.sound.SoundInstance
+import net.minecraft.client.sound.SoundSystem
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable
 
@@ -29,8 +30,16 @@ fun bypassPlayerVolume(
     if (Utils.shouldBypassVolume) cir.returnValue = 1f
 }
 
+//#if MC>=12110
+//$$ fun stopPlayingUnknownSounds(p_sound: SoundInstance, cir: CallbackInfoReturnable<SoundSystem.PlayResult>) {
+//$$     if (p_sound.id.path.isBlank() && Utils.isOnHypixel && Skytils.config.preventLogSpam) {
+//$$         cir.returnValue = SoundSystem.PlayResult.NOT_STARTED
+//$$     }
+//$$ }
+//#else
 fun stopPlayingUnknownSounds(p_sound: SoundInstance, ci: CallbackInfo) {
     if (p_sound.id.path.isBlank() && Utils.isOnHypixel && Skytils.config.preventLogSpam) {
         ci.cancel()
     }
 }
+//#endif

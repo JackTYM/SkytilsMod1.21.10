@@ -37,8 +37,15 @@ public abstract class MixinSoundManager {
         SoundManagerHookKt.bypassPlayerVolume(cir);
     }
 
+    //#if MC>=12110
+    //$$ @Inject(method = "play(Lnet/minecraft/client/sound/SoundInstance;)Lnet/minecraft/client/sound/SoundSystem$PlayResult;", at = @At("HEAD"), cancellable = true)
+    //$$ private void stopPlayingUnknownSounds(SoundInstance p_sound, CallbackInfoReturnable<SoundSystem.PlayResult> cir) {
+    //$$     SoundManagerHookKt.stopPlayingUnknownSounds(p_sound, cir);
+    //$$ }
+    //#else
     @Inject(method = "play(Lnet/minecraft/client/sound/SoundInstance;)V", at = @At("HEAD"), cancellable = true)
     private void stopPlayingUnknownSounds(SoundInstance p_sound, CallbackInfo ci) {
         SoundManagerHookKt.stopPlayingUnknownSounds(p_sound, ci);
     }
+    //#endif
 }
