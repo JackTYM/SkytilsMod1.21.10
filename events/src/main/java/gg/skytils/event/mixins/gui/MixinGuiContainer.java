@@ -40,6 +40,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(HandledScreen.class)
 public abstract class MixinGuiContainer extends Screen {
+    //#if MC>=12110
+    //$$ private static final String RENDER = "renderMain";
+    //#else
+    private static final String RENDER = "render";
+    //#endif
 
     @Shadow public ScreenHandler handler;
 
@@ -80,7 +85,7 @@ public abstract class MixinGuiContainer extends Screen {
     }
 
     //#if MC>=12000
-    @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screen/Screen;render(Lnet/minecraft/client/gui/DrawContext;IIF)V", shift = At.Shift.AFTER))
+    @Inject(method = RENDER, at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screen/Screen;render(Lnet/minecraft/client/gui/DrawContext;IIF)V", shift = At.Shift.AFTER))
     private void backgroundDrawn(DrawContext context, int mouseX, int mouseY, float partialTicks, CallbackInfo ci) {
     //#else
     //$$ @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/GlStateManager;setShaderColor(FFFF)V", ordinal = 1, shift = At.Shift.AFTER))
@@ -90,7 +95,7 @@ public abstract class MixinGuiContainer extends Screen {
     }
 
     //#if MC>=12000
-    @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screen/ingame/HandledScreen;drawForeground(Lnet/minecraft/client/gui/DrawContext;II)V", shift = At.Shift.AFTER))
+    @Inject(method = RENDER, at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screen/ingame/HandledScreen;drawForeground(Lnet/minecraft/client/gui/DrawContext;II)V", shift = At.Shift.AFTER))
     private void onForegroundDraw(DrawContext context, int mouseX, int mouseY, float partialTicks, CallbackInfo ci) {
     //#else
     //$$ @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screen/ingame/HandledScreen;drawForeground(II)V", shift = At.Shift.AFTER))
