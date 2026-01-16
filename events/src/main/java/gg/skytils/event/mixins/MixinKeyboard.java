@@ -38,7 +38,7 @@ public class MixinKeyboard {
 
     @Inject(method = "onKey", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/util/Window;getHandle()J", shift = At.Shift.AFTER, ordinal = 0), cancellable = true)
     //#if MC>=12110
-    //$$ private void onKey(long l, int action, KeyInput keyInput, CallbackInfo ci) {
+    //$$ private void onKey(long l, int action, net.minecraft.client.input.KeyInput keyInput, CallbackInfo ci) {
     //$$     int key = keyInput.asNumber();
     //#else
     private void onKey(long window, int key, int scancode, int action, int modifiers, CallbackInfo ci) {
