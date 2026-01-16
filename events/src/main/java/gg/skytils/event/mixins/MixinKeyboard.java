@@ -37,7 +37,12 @@ public class MixinKeyboard {
     @Shadow @Final private MinecraftClient client;
 
     @Inject(method = "onKey", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/util/Window;getHandle()J", shift = At.Shift.AFTER, ordinal = 0), cancellable = true)
+    //#if MC>=12110
+    //$$ private void onKey(long l, int action, KeyInput keyInput, CallbackInfo ci) {
+    //$$     int key = keyInput.asNumber();
+    //#else
     private void onKey(long window, int key, int scancode, int action, int modifiers, CallbackInfo ci) {
+    //#endif
         if (action != GLFW.GLFW_PRESS) return;
 
         if (this.client.currentScreen != null &&
