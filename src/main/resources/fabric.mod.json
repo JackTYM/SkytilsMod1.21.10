@@ -22,8 +22,11 @@
         "value": "gg.skytils.skytilsmod.SkytilsMod"
       }
     ],
-    "prelaunch": [
-      "gg.skytils.skytilsmod.SkytilsMod::preLaunch"
+    "preLaunch": [
+      {
+        "adapter": "kotlin",
+        "value": "gg.skytils.skytilsmod.SkytilsMod::preLaunch"
+      }
     ]
   },
   "mixins": [
