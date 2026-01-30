@@ -5,7 +5,7 @@ import net.fabricmc.api.ClientModInitializer
 
 object SkytilsMod : ClientModInitializer {
     override fun onInitializeClient() {
-
+        Skytils.init()
     }
 
     fun preLaunch() {
