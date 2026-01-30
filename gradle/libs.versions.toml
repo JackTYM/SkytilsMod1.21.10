@@ -1,0 +1,14 @@
+[versions]
+kotlin = "2.3.0"
+flk = "1.13.8+kotlin.2.3.0"
+egt = "0.7.0-alpha.2"
+loom = "1.13.44"
+
+[libraries]
+flk = { module = "net.fabricmc:fabric-language-kotlin", version.ref = "flk" }
+
+[plugins]
+kotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+egt-defaults = { id = "gg.essential.defaults", version.ref = "egt"}
+egt-loom = { id = "gg.essential.loom", version.ref = "loom" }
+

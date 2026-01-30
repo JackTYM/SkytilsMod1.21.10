@@ -1,0 +1,10 @@
+{
+  "compatibilityLevel": "JAVA_21",
+  "required": true,
+  "package": "gg.skytils.skytilsmod.mixins",
+  "refmap": "mixins.skytils.refmap.json",
+  "mixins": [],
+  "mixinextras": {
+    "minVersion": "0.5.3"
+  }
+}
