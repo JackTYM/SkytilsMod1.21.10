@@ -8,3 +8,8 @@ pluginManagement {
         maven("https://repo.essential.gg/repository/maven-releases/")
     }
 }
+
+include(":events")
+project(":events").apply {
+    projectDir = file("events")
+}
