@@ -3,12 +3,17 @@ kotlin = "2.3.0"
 flk = "1.13.8+kotlin.2.3.0"
 egt = "0.7.0-alpha.2"
 loom = "1.13.44"
+elementa = "714"
+uc = "446"
 
 [libraries]
 flk = { module = "net.fabricmc:fabric-language-kotlin", version.ref = "flk" }
+elementa = { module = "gg.essential:elementa", version.ref = "elementa" }
+universalcraft = { module = "gg.essential:universalcraft-1.21.9-fabric", version.ref = "uc" }
 
 [plugins]
-kotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 egt-defaults = { id = "gg.essential.defaults", version.ref = "egt"}
 egt-loom = { id = "gg.essential.loom", version.ref = "loom" }
 
