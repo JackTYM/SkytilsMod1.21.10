@@ -8,6 +8,10 @@ plugins {
     alias(libs.plugins.shadow)
 }
 
+repositories {
+    maven("https://repo.hypixel.net/repository/Hypixel")
+}
+
 val relocated: Configuration by configurations.creating
 
 dependencies {
@@ -17,6 +21,7 @@ dependencies {
     relocated(implementation(libs.elementa.layoutdsl.get())!!)
     include(modImplementation(libs.universalcraft.get())!!)
     implementation(project(":events"))
+    implementation(libs.hypixelmodapi)
 }
 
 tasks {
