@@ -20,7 +20,10 @@ dependencies {
     include(implementation(libs.elementa.asProvider().get())!!)
     relocated(implementation(libs.elementa.layoutdsl.get())!!)
     include(modImplementation(libs.universalcraft.get())!!)
-    implementation(project(":events"))
+    implementation(project(":events", configuration = "namedElements"))
+    relocated(project(":events")) {
+        isTransitive = false
+    }
     implementation(libs.hypixelmodapi)
 }
 
