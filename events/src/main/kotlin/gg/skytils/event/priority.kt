@@ -1,5 +1,6 @@
 package gg.skytils.event
 
+import org.apache.logging.log4j.LogManager
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.CopyOnWriteArrayList
 
@@ -40,6 +41,7 @@ enum class EventPriority {
         subscribe(T::class.java, block)
 
     internal open suspend fun <T : Event> post(event: T) {
+        logger.trace("Posting ${event.javaClass.name} at priority ${this.name}")
         invokeHandlers(event)
         if (!event.continuePropagation()) return
         next?.post(event)
@@ -54,5 +56,9 @@ enum class EventPriority {
                 it.printStackTrace()
             }
         }
+    }
+
+    companion object {
+        private val logger = LogManager.getLogger()
     }
 }
