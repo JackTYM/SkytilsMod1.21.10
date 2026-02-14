@@ -7,3 +7,5 @@ plugins {
 dependencies {
     modCompileOnly(libs.flk)
 }
+
+java.toolchain.languageVersion.set(JavaLanguageVersion.of(21))
