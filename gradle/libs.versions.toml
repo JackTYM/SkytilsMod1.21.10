@@ -7,6 +7,9 @@ elementa = "714"
 uc = "446"
 shadow = "9.2.2"
 hypixel = "1.0.1"
+cloud-fabric = "2.0.0-beta.13"
+cloud = "2.0.0"
+fabricapi = "0.138.4+1.21.10"
 
 [libraries]
 flk = { module = "net.fabricmc:fabric-language-kotlin", version.ref = "flk" }
@@ -14,6 +17,14 @@ elementa = { module = "gg.essential:elementa", version.ref = "elementa" }
 elementa-layoutdsl = { module = "gg.essential:elementa-unstable-layoutdsl", version.ref = "elementa" }
 universalcraft = { module = "gg.essential:universalcraft-1.21.9-fabric", version.ref = "uc" }
 hypixelmodapi = { module = "net.hypixel:mod-api", version.ref = "hypixel" }
+cloud-fabric = { module = "org.incendo:cloud-fabric", version.ref = "cloud-fabric" }
+cloud-annotaitons = { module = "org.incendo:cloud-annotations", version.ref = "cloud" }
+fabricapi-bom = { module = "net.fabricmc.fabric-api:fabric-api-bom", version.ref = "fabricapi" }
+fabricapi-commandapi = { module = "net.fabricmc.fabric-api:fabric-command-api-v2" }
+
+[bundles]
+fabricapi = [ "fabricapi-bom", "fabricapi-commandapi" ]
+cloud = [ "cloud-fabric", "cloud-annotaitons" ]
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }

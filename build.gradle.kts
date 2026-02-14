@@ -25,6 +25,8 @@ dependencies {
         isTransitive = false
     }
     implementation(libs.hypixelmodapi)
+    libs.bundles.cloud.get().forEach { include(modImplementation(it)!!) }
+    modImplementation(libs.bundles.fabricapi)
 }
 
 tasks {

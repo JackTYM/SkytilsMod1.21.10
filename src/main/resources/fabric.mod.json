@@ -35,6 +35,8 @@
   ],
   "depends": {
     "fabric-language-kotlin": "${flk}",
+    "cloud": "*",
+    "fabric-api": "*",
     "minecraft": "*",
     "java": ">21"
   }
