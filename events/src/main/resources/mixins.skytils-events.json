@@ -1,0 +1,18 @@
+{
+  "compatibilityLevel": "JAVA_21",
+  "required": true,
+  "package": "gg.skytils.event.mixin",
+  "refmap": "mixins.skytils-events.refmap.json",
+  "mixins": [
+    "network.MixinClientConnection"
+  ],
+  "mixinextras": {
+    "minVersion": "0.5.3"
+  },
+  "client": [
+    "MixinKeyboard",
+    "MixinMinecraftClient",
+    "MixinMouse",
+    "network.MixinClientPlayNetworkHandler"
+  ]
+}
