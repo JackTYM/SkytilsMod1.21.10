@@ -3,7 +3,10 @@
   "required": true,
   "package": "gg.skytils.skytilsmod.mixins",
   "refmap": "mixins.skytils.refmap.json",
-  "mixins": [],
+  "mixins": [
+    "events.MainThreadPacket_MixinPacketApplyBatcherEntry",
+    "events.MixinClientConnection"
+  ],
   "mixinextras": {
     "minVersion": "0.5.3"
   }
