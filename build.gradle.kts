@@ -25,8 +25,9 @@ dependencies {
     relocated(project(":events")) {
         isTransitive = false
     }
-    implementation(libs.hypixelmodapi)
-    libs.bundles.cloud.get().forEach { include(modImplementation(it)!!) }
+    include(implementation(libs.hypixelmodapi.get())!!)
+    include(modImplementation(libs.cloud.fabric.get())!!)
+    include(implementation(libs.cloud.annotaitons.get())!!)
     modImplementation(libs.bundles.fabricapi)
 }
 
@@ -53,5 +54,9 @@ tasks {
         configurations = listOf(relocated)
 
         relocate("gg.essential.elementa.unstable", "gg.skytils.elementa.unstable")
+
+        exclude(
+            "META-INF/maven/**",
+        )
     }
 }
