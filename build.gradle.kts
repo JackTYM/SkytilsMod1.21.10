@@ -49,7 +49,7 @@ tasks {
     }
 
     shadowJar {
-        archiveBaseName.set("Skytils-1.21.10")
+        archiveBaseName.set("Skytils-${loom.minecraftVersion.get()}")
         archiveClassifier.set("dev")
         configurations = listOf(relocated)
 
