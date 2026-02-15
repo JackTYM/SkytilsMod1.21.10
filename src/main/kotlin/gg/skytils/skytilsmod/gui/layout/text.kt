@@ -13,5 +13,5 @@ fun LayoutScope.text(textState: State<String>, modifier: Modifier = Modifier) =
         }
     }
 
-fun LayoutScope.text(text: String, modifier: Modifier = Modifier) =
-    UIText(text)(modifier)
+fun LayoutScope.text(text: String, modifier: Modifier = Modifier, shadow: Boolean = true) =
+    UIText(text, shadow)(modifier)

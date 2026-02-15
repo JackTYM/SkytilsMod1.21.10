@@ -12,6 +12,7 @@ import gg.essential.elementa.unstable.layoutdsl.hoverScope
 import gg.essential.elementa.unstable.layoutdsl.inheritHoverScope
 import gg.essential.elementa.unstable.layoutdsl.row
 import gg.essential.elementa.unstable.state.v2.State
+import gg.essential.elementa.unstable.state.v2.stateOf
 import gg.essential.universal.USound
 import java.awt.Color
 
@@ -26,3 +27,6 @@ fun LayoutScope.button(text: State<String>, modifier: Modifier = Modifier, onCli
         onClick()
     }
 }
+
+fun LayoutScope.button(text:String, modifier: Modifier = Modifier, onClick: () -> Unit) =
+    button(stateOf(text), modifier, onClick)

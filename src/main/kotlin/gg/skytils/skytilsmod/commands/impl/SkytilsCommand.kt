@@ -3,8 +3,7 @@ package gg.skytils.skytilsmod.commands.impl
 import gg.skytils.skytilsmod.Skytils
 import gg.skytils.skytilsmod.core.Config
 import gg.skytils.skytilsmod.gui.KeyShortcutsScreen
-import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource
-import net.minecraft.text.Text
+import gg.skytils.skytilsmod.gui.SkytilsScreen
 import org.incendo.cloud.annotations.Command
 import org.incendo.cloud.annotations.Commands
 
@@ -12,8 +11,8 @@ import org.incendo.cloud.annotations.Commands
 object SkytilsCommand {
 
     @Command("skytils|st")
-    fun main(sender: FabricClientCommandSource) {
-        sender.sendFeedback(Text.literal("§9§lSkytils §8» §rHello!"))
+    fun main() {
+        Skytils.displayScreen = SkytilsScreen()
     }
 
     @Command("skytils|st config")
