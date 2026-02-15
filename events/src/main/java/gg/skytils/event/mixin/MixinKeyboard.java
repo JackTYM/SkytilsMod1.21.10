@@ -17,7 +17,7 @@ public class MixinKeyboard {
     private void onKey(long window, int action, KeyInput input, CallbackInfo ci) {
         if (action != GLFW.GLFW_PRESS) return;
 
-        if (EventsKt.postCancellableSync(new KeyboardInputEvent(input.asNumber()))) {
+        if (EventsKt.postCancellableSync(new KeyboardInputEvent(input.getKeycode()))) {
             ci.cancel();
         }
     }
