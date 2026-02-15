@@ -61,7 +61,7 @@ object SBInfo : EventSubscriber {
 
     fun onPacket(event: MainThreadPacketReceiveEvent<*>) {
         if (!_hypixelState.getUntracked() && event.packet is CustomPayloadS2CPacket) {
-            _hypixelState.set((event.packet.payload as? BrandCustomPayload)?.brand?.contains("hypixel") == true)
+            _hypixelState.set((event.packet.payload as? BrandCustomPayload)?.brand?.lowercase()?.contains("hypixel") == true)
         }
         if (!_skyblockState.getUntracked() && _hypixelState.getUntracked() && event.packet is ScoreboardDisplayS2CPacket && event.packet.slot == ScoreboardDisplaySlot.SIDEBAR) {
             _skyblockState.set(event.packet.name == "SBScoreboard")
