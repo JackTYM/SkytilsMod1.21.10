@@ -1,6 +1,7 @@
 package gg.skytils.skytilsmod.commands.impl
 
 import gg.skytils.skytilsmod.Skytils
+import gg.skytils.skytilsmod.core.Config
 import gg.skytils.skytilsmod.gui.KeyShortcutsScreen
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource
 import net.minecraft.text.Text
@@ -13,6 +14,11 @@ object SkytilsCommand {
     @Command("skytils|st")
     fun main(sender: FabricClientCommandSource) {
         sender.sendFeedback(Text.literal("§9§lSkytils §8» §rHello!"))
+    }
+
+    @Command("skytils|st config")
+    fun config() {
+        Skytils.displayScreen = Config.gui()
     }
 
     @Command("skytils|st keyshortcuts|shortcuts")

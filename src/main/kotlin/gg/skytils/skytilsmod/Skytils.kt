@@ -4,6 +4,7 @@ import gg.skytils.event.EventSubscriber
 import gg.skytils.event.impl.TickEvent
 import gg.skytils.event.register
 import gg.skytils.skytilsmod.commands.SkytilsCommands
+import gg.skytils.skytilsmod.core.Config
 import gg.skytils.skytilsmod.core.HypixelApi
 import gg.skytils.skytilsmod.core.PersistentSave
 import gg.skytils.skytilsmod.features.impl.handlers.KeyShortcuts
@@ -34,6 +35,8 @@ object Skytils : EventSubscriber {
     var displayScreen: Screen? = null
 
     fun init() {
+        Config.init()
+
         listOf(
             this,
             SBInfo,
