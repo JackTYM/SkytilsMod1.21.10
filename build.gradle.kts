@@ -19,6 +19,7 @@ dependencies {
     // hack to return non null dependency
     include(implementation(libs.elementa.asProvider().get())!!)
     relocated(implementation(libs.elementa.layoutdsl.get())!!)
+    include(implementation(libs.vigilance.get())!!)
     include(modImplementation(libs.universalcraft.get())!!)
     implementation(project(":events", configuration = "namedElements"))
     relocated(project(":events")) {
