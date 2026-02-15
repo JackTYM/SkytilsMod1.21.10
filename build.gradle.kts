@@ -30,6 +30,8 @@ dependencies {
     modImplementation(libs.bundles.fabricapi)
 }
 
+java.toolchain.languageVersion.set(JavaLanguageVersion.of(21))
+
 tasks {
     processResources {
         filesMatching("fabric.mod.json") {
