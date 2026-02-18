@@ -1,4 +1,5 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+import java.security.MessageDigest
 
 plugins {
     alias(libs.plugins.kotlin.jvm)
@@ -48,6 +49,12 @@ tasks {
     remapJar {
         archiveBaseName.set(shadowJar.flatMap(ShadowJar::getArchiveBaseName))
         inputFile.set(shadowJar.flatMap(ShadowJar::getArchiveFile))
+        doLast {
+            MessageDigest.getInstance("SHA-256").digest(archiveFile.get().asFile.readBytes())
+                .let {
+                    println("SHA-256: " + it.joinToString(separator = "") { "%02x".format(it) }.uppercase())
+                }
+        }
     }
 
     shadowJar {
