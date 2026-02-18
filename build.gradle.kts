@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.egt.loom)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.shadow)
+    signing
 }
 
 repositories {
@@ -64,5 +65,12 @@ tasks {
     withType<AbstractArchiveTask> {
         isPreserveFileTimestamps = false
         isReproducibleFileOrder = true
+    }
+}
+
+signing {
+    if (project.hasProperty("signing.gnupg.keyName")) {
+        useGpgCmd()
+        sign(tasks["remapJar"])
     }
 }
