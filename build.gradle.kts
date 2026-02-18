@@ -29,6 +29,7 @@ dependencies {
     include(modImplementation(libs.cloud.fabric.get())!!)
     include(implementation(libs.cloud.annotaitons.get())!!)
     modImplementation(libs.bundles.fabricapi)
+    include(modImplementation(libs.partnermodintegration.get())!!)
 }
 
 java.toolchain.languageVersion.set(JavaLanguageVersion.of(21))

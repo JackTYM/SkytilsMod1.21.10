@@ -11,6 +11,7 @@ hypixel = "1.0.1"
 cloud-fabric = "2.0.0-beta.15"
 cloud = "2.0.0"
 fabricapi = "0.141.3+1.21.11"
+pmi = "1.0.6"
 
 [libraries]
 flk = { module = "net.fabricmc:fabric-language-kotlin", version.ref = "flk" }
@@ -23,6 +24,7 @@ cloud-fabric = { module = "org.incendo:cloud-fabric", version.ref = "cloud-fabri
 cloud-annotaitons = { module = "org.incendo:cloud-annotations", version.ref = "cloud" }
 fabricapi-bom = { module = "net.fabricmc.fabric-api:fabric-api-bom", version.ref = "fabricapi" }
 fabricapi-commandapi = { module = "net.fabricmc.fabric-api:fabric-command-api-v2" }
+partnermodintegration = { module = "gg.essential:partner-mod-integration-1.21.11-fabric", version.ref = "pmi" }
 
 [bundles]
 fabricapi = [ "fabricapi-bom", "fabricapi-commandapi" ]
