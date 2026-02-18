@@ -9,3 +9,8 @@ dependencies {
 }
 
 java.toolchain.languageVersion.set(JavaLanguageVersion.of(21))
+
+tasks.withType<AbstractArchiveTask> {
+    isPreserveFileTimestamps = false
+    isReproducibleFileOrder = true
+}

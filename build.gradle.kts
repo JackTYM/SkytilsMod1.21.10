@@ -60,4 +60,9 @@ tasks {
             "META-INF/maven/**",
         )
     }
+
+    withType<AbstractArchiveTask> {
+        isPreserveFileTimestamps = false
+        isReproducibleFileOrder = true
+    }
 }
