@@ -10,7 +10,7 @@ shadow = "9.2.2"
 hypixel = "1.0.1"
 cloud-fabric = "2.0.0-beta.15"
 cloud = "2.0.0"
-fabricapi = "0.141.3+1.21.11"
+fabricapi = "0.138.4+1.21.10"
 pmi = "1.0.6"
 
 [libraries]
@@ -18,13 +18,13 @@ flk = { module = "net.fabricmc:fabric-language-kotlin", version.ref = "flk" }
 elementa = { module = "gg.essential:elementa", version.ref = "elementa" }
 elementa-layoutdsl = { module = "gg.essential:elementa-unstable-layoutdsl", version.ref = "elementa" }
 vigilance = { module = "gg.essential:vigilance", version.ref = "vigilance" }
-universalcraft = { module = "gg.essential:universalcraft-1.21.11-fabric", version.ref = "uc" }
+universalcraft = { module = "gg.essential:universalcraft-1.21.9-fabric", version.ref = "uc" }
 hypixelmodapi = { module = "net.hypixel:mod-api", version.ref = "hypixel" }
 cloud-fabric = { module = "org.incendo:cloud-fabric", version.ref = "cloud-fabric" }
 cloud-annotaitons = { module = "org.incendo:cloud-annotations", version.ref = "cloud" }
 fabricapi-bom = { module = "net.fabricmc.fabric-api:fabric-api-bom", version.ref = "fabricapi" }
 fabricapi-commandapi = { module = "net.fabricmc.fabric-api:fabric-command-api-v2" }
-partnermodintegration = { module = "gg.essential:partner-mod-integration-1.21.11-fabric", version.ref = "pmi" }
+partnermodintegration = { module = "gg.essential:partner-mod-integration-1.21.9-fabric", version.ref = "pmi" }
 
 [bundles]
 fabricapi = [ "fabricapi-bom", "fabricapi-commandapi" ]
