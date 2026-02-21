@@ -36,5 +36,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Skytils-1.21.10
-          path: build/libs/Skytils-*.jar
+          path: mod/versions/1.21.10-fabric/build/libs/Skytils-*.jar
           if-no-files-found: error
