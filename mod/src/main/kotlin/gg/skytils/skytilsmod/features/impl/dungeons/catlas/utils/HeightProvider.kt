@@ -24,6 +24,8 @@ import gg.skytils.event.impl.world.BlockStateUpdateEvent
 import gg.skytils.event.impl.world.ChunkLoadEvent
 import gg.skytils.event.register
 import gg.skytils.skytilsmod._event.MainThreadPacketReceiveEvent
+import it.unimi.dsi.fastutil.longs.Long2IntMap
+import it.unimi.dsi.fastutil.longs.Long2IntMaps
 import it.unimi.dsi.fastutil.longs.Long2IntOpenHashMap
 import net.minecraft.network.packet.s2c.play.UnloadChunkS2CPacket
 import net.minecraft.util.math.BlockPos
@@ -32,7 +34,7 @@ import net.minecraft.util.math.ChunkSectionPos
 import kotlin.math.max
 
 object HeightProvider : EventSubscriber {
-    val heightMap = Long2IntOpenHashMap().also { it.defaultReturnValue(Integer.MIN_VALUE) }
+    val heightMap: Long2IntMap = Long2IntMaps.synchronize(Long2IntOpenHashMap().also { it.defaultReturnValue(Integer.MIN_VALUE) })
 
     override fun setup() {
         register(::onWorldUnload)

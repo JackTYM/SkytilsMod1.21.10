@@ -274,10 +274,7 @@ object RenderUtil {
         partialTicks: Float, matrixStack: UMatrixStack,
         shadow: Boolean = true, scale: Float = 1f, background: Boolean = true
     ) {
-        matrixStack.push()
-        DrawHelper.cameraOffset(matrixStack)
         DrawHelper.drawNametag(matrixStack, str, x, y, z, shadow, scale, background)
-        matrixStack.pop()
     }
 
     @JvmStatic

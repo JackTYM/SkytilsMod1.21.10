@@ -218,8 +218,8 @@ dependencies {
     compileOnly("org.bouncycastle:bcprov-jdk18on:1.78.1")
 
     if (platform.isFabric && !isLegacyFabric) {
-        modImplementation("org.incendo:cloud-fabric:2.0.0-beta.10")
-        include("org.incendo:cloud-fabric:2.0.0-beta.10")
+        modImplementation("org.incendo:cloud-fabric:2.0.0-beta.13")
+        include("org.incendo:cloud-fabric:2.0.0-beta.13")
         include(implementation("org.incendo:cloud-annotations:2.0.0")!!)
         modLocalRuntime("net.fabricmc:fabric-language-kotlin:1.13.3+kotlin.2.1.21")
     }
@@ -256,7 +256,8 @@ sourceSets {
 
 val enabledVersions = setOf(
     "1.8.9-forge",
-    "1.21.5-fabric"
+    "1.21.5-fabric",
+    "1.21.10-fabric"
 )
 
 tasks {

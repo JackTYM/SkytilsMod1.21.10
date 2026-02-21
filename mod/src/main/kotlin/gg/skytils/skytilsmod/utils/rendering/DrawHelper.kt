@@ -243,16 +243,20 @@ object DrawHelper {
     }
 
     /**
-     * Draws a nametag at the given position.
-     * This method will apply the camera rotation for you, but not the camera offset.
+     * Draws a nametag at the given position in world space.
+     * Expects camera transformations to NOT be applied yet - this method handles everything.
     */
     fun drawNametag(matrices: UMatrixStack, text: String, x: Double, y: Double, z: Double, shadow: Boolean = true, scale: Float = 1f, background: Boolean = true, throughWalls: Boolean = false) {
         matrices.push()
+        // Apply view transformation (same as box rendering)
+        setupCameraTransformations(matrices)
+        // Translate to world position
         matrices.translate(x, y + 0.5, z)
-        mc.entityRenderDispatcher.camera?.rotation?.let(matrices::multiply)
+        // Billboard: face the camera by applying camera rotation (not conjugate)
+        mc.gameRenderer.camera?.rotation?.let(matrices::multiply)
         matrices.scale(0.025f, -0.025f, 0.025f)
-
         matrices.scale(scale, scale, scale)
+
         val centerPos = UGraphics.getStringWidth(text) / -2f
         val backgroundColor = if (!background) 0 else (mc.options.getTextBackgroundOpacity(0.25f) * 255).toInt() shl 24
         mc.textRenderer.draw(
@@ -267,6 +271,7 @@ object DrawHelper {
             backgroundColor,
             15728880
         )
+        mc.bufferBuilders.entityVertexConsumers.drawCurrentLayer()
         matrices.pop()
     }
 
